@@ -1,0 +1,56 @@
+.key-selector-container {
+  margin: 20px;
+}
+
+.key-selector-container>div {
+  width: 47%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.key-selector-button {
+  position: relative;
+  height: 60px;
+  width: 60px;
+  cursor: pointer;
+}
+
+.key-selector-button>p{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  font-size: 2.4em;
+  letter-spacing: 1.75px;
+}
+
+.accidental-selector-button {
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  color: #bbbbbb;
+  font-size: 4em;
+  height: 140px;
+  width: 140px;
+  cursor: pointer;
+}
+
+.active {
+  background-color: #3e3e3e;
+  color: #EAEAEA;
+}
+
+.inactive {
+  background-color: #EAEAEA;
+}
+
+.key-selector-accidental-selector-text {
+  vertical-align: middle;
+}

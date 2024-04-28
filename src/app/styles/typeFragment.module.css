@@ -1,0 +1,84 @@
+.type-fragment-container {
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.type-fragment-container h1 {
+  margin: 20px 0;
+}
+
+.type-fragment-intervals {
+  font-size: 0.9em;
+  font-weight: 800;
+  color: #BBBBBB;
+}
+
+.corresponding-modes * {
+  margin: 10px 0 10px 10px;
+}
+
+.corresponding-modes-header {
+  font-weight: 500;
+}
+
+.corresponding-modes-list,
+.type-fragment,
+.ball {
+  display: flex;
+}
+
+.corresponding-modes-list,
+.type-fragment {
+  flex-direction: row;
+}
+
+.corresponding-modes-list {
+  list-style: none;
+  font-style: italic;
+  font-size: 0.95em;
+}
+
+.mode-button {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.mode-button.active {
+  color: red;
+}
+
+.mode-button.inactive {
+  color: black;
+}
+
+.ball {
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  width: 35px;
+  height: 35px;
+  margin: 10px;
+  border: 2px solid #999999;
+}
+
+.ball.active {
+  background-color: #3e3e3e;
+  cursor: pointer;
+}
+
+.ball.inactive {
+  background-color: #eaeaea;
+  cursor: default;
+}
+
+.ball>p {
+  font-size: 1.2em;
+  font-weight: 800;
+  color: #999999;
+}
