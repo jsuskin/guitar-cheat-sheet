@@ -22,15 +22,15 @@ export interface TypeFragment extends TypeFragmentDynamicProps {
 }
 
 export type ModalDisplayList = [
-  0 | 1 | 2 | "all",
-  0 | 1 | "all",
-  0 | 1 | "all"
+  Range_3 | "all",
+  Range_2 | "all",
+  Range_2 | "all"
 ];
 
 export interface Ball {
   active: boolean;
   typeFragmentNum: number;
-  idx: number;
+  ballIdx: Range_5;
   rootNoteIdx: number;
   accidental: Accidental;
   modalDisplay: any;
@@ -66,6 +66,8 @@ export type Mode =
   | "Aeolian"
   | "Locrian";
 
-export type Range_3 = 0 | 1 | 2;
-export type Range_7 = Range_3 | 3 | 4 | 5 | 6;
+export type Range_2 = 0 | 1;
+export type Range_3 = Range_2 | 2;
+export type Range_5 = Range_3 | 3 | 4;
+export type Range_7 = Range_5 | 5 | 6;
 export type Range_12 = Range_7 | 7 | 8 | 9 | 10 | 11;

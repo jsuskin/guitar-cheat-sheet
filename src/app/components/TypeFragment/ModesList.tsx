@@ -48,12 +48,14 @@ export default function ModesList({
                 e.preventDefault();
 
                 setModalDisplayList((prev: Range_3[]) => {
-                  const newArr = [...prev]
+                  const newArr = [...prev];
                   newArr[typeIdx] = idx as 0 | 1;
                   return newArr;
                 });
               }}
-              className={`${styles['mode-button']} ${styles[idx === modalDisplay ? 'active' : 'inactive']}`}
+              className={`${styles["mode-button"]} ${
+                styles[idx === modalDisplay ? "active" : "inactive"]
+              }`}
             >
               {modeName}
             </button>
@@ -62,6 +64,9 @@ export default function ModesList({
           </li>
         );
       })}
+      <li>
+        <button className={styles["mode-button"]}>Show All</button>
+      </li>
     </ul>
   );
 }
