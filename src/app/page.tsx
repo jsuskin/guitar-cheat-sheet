@@ -3,9 +3,13 @@ import React, { useState } from "react";
 import styles from "./page.module.css";
 import _TypeFragment from "./components/TypeFragment";
 import MajorScaleKeySelector from "./components/MajorScaleKeySelector";
-import { Accidental, Note } from "@/types";
-import type { ModalDisplayList, TypeFragmentDynamicProps } from "@/types";
 import Fretboard from "./components/Fretboard";
+import type {
+  Accidental,
+  Note,
+  ModalDisplayList,
+  TypeFragmentDynamicProps,
+} from "@/types";
 
 export default function Home() {
   const [selectedMajorKey, setSelectedMajorKey] = useState<Note | null>(null); // X

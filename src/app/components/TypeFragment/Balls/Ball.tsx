@@ -15,7 +15,8 @@ export default function Ball({
   const typeIdx = (typeFragmentNum - 1) as Range_3;
   const modeIdx = correspondingModeNums[typeIdx][modalDisplay] as Range_7;
   const noteIdx = ((ballIdx + typeIdx + modeIdx) % 12) as Range_12; // idx from selected root note, chromatic; i.e. root === 'B' ∴ 'D#' will give 4
-  const scalePositionIdx = (Math.ceil(ballIdx / 2 + modeIdx) % 6) as Range_7;
+  const scalePositionIdx = (Math.ceil(ballIdx / 2 + modeIdx) % 7) as Range_7;
+  const isRoot = !scalePositionIdx;
 
   let note: undefined | Note;
 
@@ -28,16 +29,15 @@ export default function Ball({
   }
 
   return (
-    <div className={`${styles.ball} ${styles[`${active ? "" : "in"}active`]}`}>
-      <p>
-        {active
-          ? note
-            ? note
-            : !scalePositionIdx
-            ? "R"
-            : scalePositionIdx + 1
-          : ""}
-      </p>
+    <div
+      className={`${styles.ball} ${styles[`${active ? "" : "in"}active`]}${
+        active && isRoot ? ` ${styles.root}` : ""
+      }`}
+      onClick={() => {
+        console.log({ typeIdx, modeIdx, noteIdx, scalePositionIdx });
+      }}
+    >
+      <p>{active ? (note ? note : isRoot ? "R" : scalePositionIdx + 1) : ""}</p>
     </div>
   );
 }

@@ -50,11 +50,11 @@
 }
 
 .mode-button.active {
-  color: red;
+  color: #ff2323;
 }
 
 .mode-button.inactive {
-  color: black;
+  color: #3e3e3e;
 }
 
 .ball {
@@ -81,4 +81,13 @@
   font-size: 1.2em;
   font-weight: 800;
   color: #999999;
+}
+
+.root {
+  background-color: #ff2323 !important;
+  border-color: #3e3e3e !important;
+}
+
+.root>p {
+  color: #3e3e3e !important;
 }

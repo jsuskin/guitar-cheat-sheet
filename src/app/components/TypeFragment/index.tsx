@@ -1,10 +1,9 @@
-"use client";
-import React, { useEffect } from "react";
-import Ball from "../Ball";
+import React from "react";
 import styles from "@/app/styles/typeFragment.module.css";
-import type { Range_5, TypeFragment } from "@/types";
+import type { Range_2, Range_3, Range_5, TypeFragment } from "@/types";
 import TypeFragmentHeader from "./TypeFragmentHeader";
 import ModesList from "./ModesList";
+import { default as _Balls } from "./Balls";
 
 export default function TypeFragment({
   type,
@@ -14,7 +13,17 @@ export default function TypeFragment({
   modalDisplay,
   setModalDisplayList,
 }: TypeFragment) {
-  const d = Array.from({ length: 5 }, (_, idx) => activeList.includes(idx));
+  const Balls = ({ _modalDisplay = modalDisplay }: any) => (
+    <_Balls
+      {...{
+        rootNoteIdx,
+        accidental,
+        type,
+        activeList,
+        modalDisplay: _modalDisplay,
+      }}
+    />
+  );
 
   return (
     <section className={styles["type-fragment-container"]}>
@@ -36,16 +45,17 @@ export default function TypeFragment({
           />
         </div>
       </div>
-      <ul className={styles["type-fragment"]}>
-        {d.map((active, ballIdx) => (
-          <Ball
-            key={ballIdx}
-            ballIdx={ballIdx as Range_5}
-            typeFragmentNum={type}
-            {...{ active, rootNoteIdx, accidental, modalDisplay }}
-          />
-        ))}
-      </ul>
+      <div>
+        {modalDisplay === "all" ? (
+          <>
+            <Balls _modalDisplay={0} />
+            <Balls _modalDisplay={1} />
+            {type === 1 && <Balls _modalDisplay={2} />}
+          </>
+        ) : (
+          <Balls />
+        )}
+      </div>
     </section>
   );
 }

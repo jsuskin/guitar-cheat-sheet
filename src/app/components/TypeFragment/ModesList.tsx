@@ -15,8 +15,17 @@ export default function ModesList({
   typeIdx,
   rootNoteIdx,
   activeList,
-  accidental
+  accidental,
 }: any) {
+  const handleShowAll = (e: any) => {
+    e.preventDefault();
+    setModalDisplayList((prev: any) => {
+      const newArr = [...prev];
+      newArr[typeIdx] = "all";
+      return newArr;
+    });
+  };
+
   return (
     <ul className={styles["corresponding-modes-list"]}>
       {correspondingModeNames[typeIdx].map((modeName, idx) => {
@@ -65,7 +74,9 @@ export default function ModesList({
         );
       })}
       <li>
-        <button className={styles["mode-button"]}>Show All</button>
+        <button onClick={handleShowAll} className={styles["mode-button"]}>
+          Show All
+        </button>
       </li>
     </ul>
   );
