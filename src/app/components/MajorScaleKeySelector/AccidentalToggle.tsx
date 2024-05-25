@@ -11,7 +11,7 @@ export default function AccidentalToggle({ accidental, handleClick }: {accidenta
       onClick={handleClick(displaySharps ? "flat" : "sharp")}
       title={`Display ${displaySharps ? "flats" : "sharps"}`}
     >
-      {displaySharps ? "♭" : "♯"}
+      <p style={{position:"absolute"}}>{displaySharps ? "♭" : "♯"}</p>
     </button>
   );
 }

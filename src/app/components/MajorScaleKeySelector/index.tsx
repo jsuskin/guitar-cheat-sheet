@@ -8,22 +8,21 @@ import AccidentalToggle from "./AccidentalToggle";
 import KeySelectorButton from "./KeySelectorButton";
 
 export default function MajorScaleKeySelector({
-  selected,
-  setSelected,
   noteNum,
   setNoteNum,
   accidental,
   setAccidental,
 }: MajorScaleKeySelector) {
   const notes = notesObj[accidental] as Note[];
+  const selected = notes[noteNum];
 
-  const handleNoteClick = (note: Note) => (e: any) => {
+  const handleNoteClick = (note: Note | null) => (e: any) => {
     e.preventDefault();
 
-    setSelected(selected === note ? null : note); // X
-
-    const noteIdx = notesJoined.findIndex((set: Set<Note>) => set.has(note));
-    setNoteNum((prev: number) => (prev === noteIdx ? -1 : noteIdx));
+    if (note) {
+      const noteIdx = notesJoined.findIndex((set: Set<Note>) => set.has(note));
+      setNoteNum((prev: number) => (prev === noteIdx ? -1 : noteIdx));
+    }
   };
 
   const handleAccidentalClick = (accidental: Accidental) => (e: any) => {
@@ -31,20 +30,16 @@ export default function MajorScaleKeySelector({
     setAccidental(accidental);
   };
 
-  useEffect(() => {
-    console.log({ selected, noteNum });
-  }, [selected, noteNum]);
-
   return (
     <section className={styles["key-selector-container"]}>
-      <h1>Major Scale Key Selector</h1>
+      {/* <h1>Major Scale Key Selector</h1> */}
       <div>
         <div>
           {notes.map((note, idx) => (
             <KeySelectorButton
               key={idx}
               handleClick={handleNoteClick}
-              {...{ selected, note }}
+              {...{ note, selected }}
             />
           ))}
         </div>

@@ -1,4 +1,4 @@
-<svg viewBox="0 0 1195 11500" style="stroke-width:20" 
+<svg id="fretboard-svg" viewBox="0 0 1195 11500" style="stroke-width:20" 
    xmlns="http://www.w3.org/2000/svg">
 <linearGradient id="string-pattern">
 <stop offset="5%" stop-color="#888"/>

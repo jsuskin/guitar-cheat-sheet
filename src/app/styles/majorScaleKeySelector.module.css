@@ -1,12 +1,12 @@
 .key-selector-container {
-  margin: 20px;
+  /* margin: 20px; */
 }
 
 .key-selector-container>div {
-  width: 47%;
+  /* width: 47%; */
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  /* justify-content: space-between; */
+  /* align-items: center; */
 }
 
 .key-selector-button {
@@ -30,15 +30,17 @@
 }
 
 .accidental-selector-button {
+  position: relative;
   border: none;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center; */
+  /* align-items: center; */
   background-color: transparent;
   color: #bbbbbb;
-  font-size: 4em;
-  height: 140px;
-  width: 140px;
+  font-size: 3.2em;
+  /* height: 140px; */
+  /* width: 140px; */
+  margin-left:20px;
   cursor: pointer;
 }
 

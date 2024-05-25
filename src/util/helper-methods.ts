@@ -13,19 +13,15 @@ export const getNoteIndex = (
     )
   );
 
-export const rotateArray = (pivot: number, arr: Set<Note>[] | number[]) => [pivot, 0].map((val, idx, self) =>
-    arr.slice(val, ...[self[--idx]])
-  );
+export const rotateArray = (pivot: number, arr: Set<Note>[] | number[]) =>
+  [pivot, 0].map((val, idx, self) => arr.slice(val, ...[self[--idx]])).flat();
 
 export const getNotesFromRoot = (
   rootNoteNum: number,
   notesJoined: Set<Note>[],
   modeIndex: number
-) => {
-  const pivot = (rootNoteNum + majorScalePositions[modeIndex]) % 12;
-  const [left, right] = rotateArray(pivot, notesJoined);
-  return [...left, ...right];
-};
+) =>
+  rotateArray((rootNoteNum + majorScalePositions[modeIndex]) % 12, notesJoined);
 
 export const filterByAccidental = (accidental: Accidental) => (note: Note) =>
   note.length < 2 || note[1] === (accidental === "sharp" ? "♯" : "♭");

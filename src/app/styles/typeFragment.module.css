@@ -13,6 +13,13 @@
   color: #BBBBBB;
 }
 
+.type-fragment {
+  width: 320px;
+  justify-content: space-evenly;
+  transition: background-color 300ms ease;
+  border-radius: 3px;
+}
+
 .corresponding-modes * {
   margin: 10px 0 10px 10px;
 }
@@ -47,15 +54,16 @@
   font-style: italic;
   font-size: 1em;
   cursor: pointer;
+  color: #3e3e3e;
 }
 
-.mode-button.active {
+/* .mode-button.active {
   color: #ff2323;
 }
 
 .mode-button.inactive {
   color: #3e3e3e;
-}
+} */
 
 .ball {
   justify-content: center;
@@ -73,18 +81,18 @@
 }
 
 .ball.inactive {
-  background-color: #eaeaea;
+  background-color: #eaeaea !important;
   cursor: default;
 }
 
 .ball>p {
   font-size: 1.2em;
   font-weight: 800;
-  color: #999999;
+  /* color: #999999; */
 }
 
 .root {
-  background-color: #ff2323 !important;
+  background-color: #ff2323ba !important;
   border-color: #3e3e3e !important;
 }
 

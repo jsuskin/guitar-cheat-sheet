@@ -12,7 +12,7 @@ export default function Ball({
   accidental,
   modalDisplay,
 }: Ball) {
-  const typeIdx = (typeFragmentNum - 1) as Range_3;
+  const typeIdx = (typeFragmentNum - 1) as Range_3 | number;
   const modeIdx = correspondingModeNums[typeIdx][modalDisplay] as Range_7;
   const noteIdx = ((ballIdx + typeIdx + modeIdx) % 12) as Range_12; // idx from selected root note, chromatic; i.e. root === 'B' ∴ 'D#' will give 4
   const scalePositionIdx = (Math.ceil(ballIdx / 2 + modeIdx) % 7) as Range_7;
@@ -22,7 +22,7 @@ export default function Ball({
 
   if (active && rootNoteIdx >= 0) {
     const pivot = rootNoteIdx + modeIdx - typeIdx - +!!(modeIdx - typeIdx);
-    const rotatedArray: any[] = rotateArray(pivot, notesJoined).flat();
+    const rotatedArray: any[] = rotateArray(pivot, notesJoined);
     note = [...rotatedArray[noteIdx]]
       .filter(filterByAccidental(accidental))
       .pop();
@@ -33,6 +33,7 @@ export default function Ball({
       className={`${styles.ball} ${styles[`${active ? "" : "in"}active`]}${
         active && isRoot ? ` ${styles.root}` : ""
       }`}
+      style={{ backgroundColor: ["#1db52f7a", "#b01bb37a", "#ed8e117a"][typeIdx] }}
       onClick={() => {
         console.log({ typeIdx, modeIdx, noteIdx, scalePositionIdx });
       }}

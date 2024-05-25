@@ -1,6 +1,4 @@
 export interface MajorScaleKeySelector {
-  selected: null | Note; // X
-  setSelected: (note: null | Note) => void; // X
   noteNum: number;
   setNoteNum: (prevNum: number | ((prev: number) => number)) => void;
   accidental: Accidental;
@@ -34,6 +32,8 @@ export interface Ball {
   rootNoteIdx: number;
   accidental: Accidental;
   modalDisplay: any;
+  hover: any;
+  setHover: any;
 }
 
 export type Accidental = "sharp" | "flat";

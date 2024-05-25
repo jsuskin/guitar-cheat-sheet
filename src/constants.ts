@@ -29,6 +29,20 @@ export const modes = [
   "Locrian",
 ];
 
+export const modePositionGroups = [
+  [0, 2, 4], // Ionian
+  [2, 4, 5], // Dorian
+  [4, 5, 7], // Phrygian
+  [5, 7, 9], // Lydian
+  [7, 9, 11], // Mixolydian
+  [9, 11, 0], // Aeolian
+  [11, 0, 2], // Locrian
+];
+
+export const modesObj = Object.fromEntries(
+  modes.map((modeName, idx) => [modeName, modePositionGroups[idx]])
+);
+
 export const correspondingModeNums = [
   [1, 4, 5],
   [2, 6],
@@ -40,3 +54,51 @@ export const correspondingModeNames = correspondingModeNums.map((arr) =>
 );
 
 export const majorScalePositions = [0, 2, 4, 5, 7, 9, 11];
+
+export const stringXPositions = [
+  "16.666666667",
+  "325.0",
+  "633.33333333",
+  "941.66666667",
+  "1250.0",
+  "1558.33333333",
+];
+
+export const fretYPositions = [
+  "20.0",
+  "820.0",
+  "1575.09945014535",
+  "2287.81842465763",
+  "2960.5355568606",
+  "3595.49597764788",
+  "4194.81880839855",
+  "4760.50423334779",
+  "5294.4401750158",
+  "5798.40859497375",
+  "6274.09144097484",
+  "6723.07626029859",
+  "7146.86149804231",
+  "7546.86149804231",
+  "7924.41122311498",
+  "8280.77071037112",
+  "8617.12927647261",
+  "8934.60948686625",
+  "9234.27090224158",
+  "9517.1136147162",
+  "9784.08158555021",
+  "10036.0657955292",
+  "10273.9072185297",
+  "10498.3996281916",
+  "10710.2922470635",
+];
+
+export const fretMidpoints: string[] = ((arr: string[] = []) => {
+  for (let i = 0; i < fretYPositions.length - 1; i++) {
+    const sum = +fretYPositions[i] + +fretYPositions[i + 1];
+    const midpoint = sum / 2;
+    arr.push(`${midpoint - 25}`);
+  }
+  return arr;
+})();
+
+export const tuning = [7, 0, 5, 10, 2, 7];

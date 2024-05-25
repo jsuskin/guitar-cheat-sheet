@@ -56,7 +56,7 @@ export default function ModesList({
               onClick={(e) => {
                 e.preventDefault();
 
-                setModalDisplayList((prev: Range_3[]) => {
+                setModalDisplayList((prev: Range_3[] | number[]) => {
                   const newArr = [...prev];
                   newArr[typeIdx] = idx as 0 | 1;
                   return newArr;
