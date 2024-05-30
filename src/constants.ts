@@ -102,3 +102,21 @@ export const fretMidpoints: string[] = ((arr: string[] = []) => {
 })();
 
 export const tuning = [7, 0, 5, 10, 2, 7];
+
+export const fretDotColors = [
+  "#FF2323", // Red
+  "#1DB52F", // Green
+  "#B01BB3", // Purple
+  "#ED8E11", // Orange
+  "#E8EB34", // Yellow
+  "#008080", // Teal
+  "#FF7F50", // Coral
+  "#6A5ACD", // Slate Blue
+  "#DAA520", // Goldenrod
+  "#2E8B57", // Sea Green
+  "#FF6347", // Tomato
+  "#DA70D6", // Orchid
+  "#87CEEB", // Sky Blue
+  "#D2691E", // Chocolate
+  "#9370DB", // Medium Purple
+];

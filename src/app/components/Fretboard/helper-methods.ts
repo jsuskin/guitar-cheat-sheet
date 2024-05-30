@@ -4,19 +4,18 @@ import { rotateArray as _rotateArray } from "@/util/helper-methods";
 import { v4 as uuidv4 } from "uuid";
 
 export const addDotToGroup =
-  (group: any, note: Note, fillColor: string, translate: number) =>
+  (group: any, note: Note, fillColor: string, rootNote = "C", modeName = "Ionian") =>
   ([stringIdx, fretIdx]: number[]) => {
-    const className = "active-fret";
-    const coords = `${stringIdx}_${fretIdx}`;
-    const id = `${className}__${coords}___${uuidv4()}`;
+    const coords = `s${stringIdx}_f${fretIdx}`;
+
     const circle = group
       .circle(100)
       .fill(fillColor)
       .move(
-        +stringXPositions[stringIdx] - 40 + translate,
+        +stringXPositions[stringIdx] - 40,
         +fretMidpoints[fretIdx]
       )
-      .attr({ id, class: className });
+      .attr({ key: uuidv4(), class: `active-fret ${coords} ${modeName}` });
 
     // Add click handler to dot
     circle.click(function () {
@@ -25,7 +24,7 @@ export const addDotToGroup =
     });
 
     // Add title to dot
-    circle.element("title").words(`${note}__${coords}`);
+    circle.element("title").words(`${rootNote} ${modeName} -> ${note}__${coords}`);
   };
 
 export const rotateArray = (
@@ -43,7 +42,7 @@ export const rotateArray = (
 export const updateActiveFrets =
   (coords: string, patternIndex: number, note: Note) => (prev: any) => {
     const newObj = { ...prev };
-    console.log("updateActiveFrets ",{newObj})
+    console.log("updateActiveFrets ", { newObj });
     const curKey = coords;
     newObj[curKey] = [...(newObj[curKey] || [null, null, null])];
     newObj[curKey][patternIndex] = note;
