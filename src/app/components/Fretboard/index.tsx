@@ -11,11 +11,17 @@ import {
 } from "./helper-methods";
 import { useAppSelector } from "@/app/redux/hooks";
 
-export default function Fretboard({ rootNoteIdx }: any) {
+export default function Fretboard({
+  rootNoteIdx,
+  displayAccidental,
+}: {
+  rootNoteIdx: number;
+  displayAccidental: "sharp" | "flat";
+}) {
   // const [fretboardSVG, setFretboardSVG] = useState<any>(null);
   // const [activeFrets, setActiveFrets] = useState({});
-  const fretboardPatternsArray = useAppSelector((state: any) =>
-    state.fretboard.patternsArray
+  const fretboardPatternsArray = useAppSelector(
+    (state: any) => state.fretboard.patternsArray
   );
   const fretboardSVGRef = useRef<Svg | null>(null);
   const groupsMapRef = useRef<Map<string, any>>(new Map());
@@ -27,28 +33,28 @@ export default function Fretboard({ rootNoteIdx }: any) {
   }, []);
 
   const addFretDots = (
-    note: Note = "C",
+    note: Note,
     fillColor: string,
-    patternIndex: Range_3 | number
+    modeName: string,
+    rootNote: Note
   ) => {
     const matchingFrets = [];
 
+    // Loop through strings
     for (let stringIdx = 0; stringIdx < 6; stringIdx++) {
       const rotatedNotes = rotateArray(notesJoined, stringIdx);
 
+      // Loop through frets
       for (let fretIdx = 0; fretIdx < 24; fretIdx++) {
-        if (rotatedNotes[fretIdx % 12].has(note)) {
-          const coords = [stringIdx, fretIdx];
-
-          matchingFrets.push(coords);
-        }
+        if (rotatedNotes[fretIdx % 12].has(note))
+          matchingFrets.push([stringIdx, fretIdx]);
       }
     }
 
     if (fretboardSVGRef.current) {
       const group = fretboardSVGRef.current.group(); // Create a <g> element
       matchingFrets.forEach((coords) => {
-        addDotToGroup(group, note, fillColor)(coords);
+        addDotToGroup(group, note, fillColor, rootNote, modeName)(coords);
         const key = coords.join("_"); // `${stringIdx}_${fretIdx}`
         if (!groupsMapRef.current.has(key)) groupsMapRef.current.set(key, []);
         groupsMapRef.current.get(key).push(group);
@@ -70,22 +76,21 @@ export default function Fretboard({ rootNoteIdx }: any) {
       Object.entries(fretboardPatternsArray).forEach(
         ([modeName, arr]: any, patternIdx: Range_3 | number) => {
           arr.forEach((noteIdx: number) => {
-            const note: any = rotateArray(
-              notesObj.sharp as any,
+            const rootNote = notesObj[displayAccidental][rootNoteIdx];
+            const notesArray = notesObj[displayAccidental];
+            const curNote: any = rotateArray(
+              notesArray,
               rootNoteIdx,
               "root note"
             )[noteIdx];
+            const dColor = fretDotColors[!noteIdx ? 0 : patternIdx + 1];
 
-            addFretDots(
-              note,
-              fretDotColors[!noteIdx ? 0 : patternIdx + 1],
-              patternIdx
-            );
+            addFretDots(curNote, dColor, modeName, rootNote);
           });
         }
       );
     }
-    console.log({fretboardPatternsArray})
+    console.log({ fretboardPatternsArray });
   }, [rootNoteIdx, fretboardPatternsArray]);
 
   useEffect(() => {
@@ -109,8 +114,8 @@ export default function Fretboard({ rootNoteIdx }: any) {
             if (!idx) element.animate(400).x(cx - 110);
             if (idx) element.animate(400).x(cx + 10);
           } else if (idx && len === 3) {
-            if(idx === 1) element.animate(400).x(cx - 140)
-            if(idx === 2) element.animate(400).x(cx + 40)
+            if (idx === 1) element.animate(400).x(cx - 140);
+            if (idx === 2) element.animate(400).x(cx + 40);
           }
         });
       }

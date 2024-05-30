@@ -1,20 +1,20 @@
 import React from "react";
-import styles from "@/app/styles/typeFragment.module.css";
-import type { Range_2, Range_3, Range_5, TypeFragment } from "@/types";
-import TypeFragmentHeader from "./TypeFragmentHeader";
+import styles from "@/app/styles/intervalPatterns.module.css";
+import type { Range_2, Range_3, Range_5, IntervalPatterns } from "@/types";
+import IntervalPatternsHeader from "./IntervalPatternsHeader";
 import ModesList from "./ModesList";
-import { default as _Balls } from "./Balls";
+import { default as _IntervalSteps } from "./IntervalSteps";
 
-export default function TypeFragment({
+export default function IntervalPatterns({
   type,
   activeList,
   rootNoteIdx,
   accidental,
   modalDisplay,
   setModalDisplayList,
-}: TypeFragment) {
-  const Balls = ({ _modalDisplay = modalDisplay }: any) => (
-    <_Balls
+}: IntervalPatterns) {
+  const IntervalSteps = ({ _modalDisplay = modalDisplay }: any) => (
+    <_IntervalSteps
       {...{
         rootNoteIdx,
         accidental,
@@ -27,7 +27,7 @@ export default function TypeFragment({
 
   return (
     <section className={styles["type-fragment-container"]}>
-      <TypeFragmentHeader {...{ type }} />
+      <IntervalPatternsHeader {...{ type }} />
       <div>
         <div className={styles["corresponding-modes"]}>
           <h3 className={styles["corresponding-modes-header"]}>
@@ -48,12 +48,12 @@ export default function TypeFragment({
       <div>
         {modalDisplay === "all" ? (
           <>
-            <Balls _modalDisplay={0} />
-            <Balls _modalDisplay={1} />
-            {type === 1 && <Balls _modalDisplay={2} />}
+            <IntervalSteps _modalDisplay={0} />
+            <IntervalSteps _modalDisplay={1} />
+            {type === 1 && <IntervalSteps _modalDisplay={2} />}
           </>
         ) : (
-          <Balls />
+          <IntervalSteps />
         )}
       </div>
     </section>

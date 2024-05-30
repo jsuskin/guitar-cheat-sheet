@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "@/app/styles/typeFragment.module.css";
+import styles from "@/app/styles/intervalPatterns.module.css";
 import {
   correspondingModeNames,
   correspondingModeNums,

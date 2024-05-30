@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
-import Ball from "./Ball";
-import type { Range_5, TypeFragment } from "@/types";
-import styles from "@/app/styles/typeFragment.module.css";
+import IntervalStepIcon from "./StepIcon";
+import type { Range_5, IntervalPatterns } from "@/types";
+import styles from "@/app/styles/intervalPatterns.module.css";
 
-export default function index({
+export default function IntervalSteps({
   activeList,
   type,
   rootNoteIdx,
@@ -25,7 +25,7 @@ export default function index({
       }}
     >
       {d.map((active, ballIdx) => (
-        <Ball
+        <IntervalStepIcon
           key={ballIdx}
           ballIdx={ballIdx as Range_5}
           typeFragmentNum={type}

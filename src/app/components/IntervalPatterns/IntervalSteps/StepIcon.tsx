@@ -1,17 +1,17 @@
 import React from "react";
-import styles from "@/app/styles/typeFragment.module.css";
-import type { Ball, Note, Range_3, Range_7, Range_12 } from "@/types";
+import styles from "@/app/styles/intervalPatterns.module.css";
+import type { IntervalStep, Note, Range_3, Range_7, Range_12 } from "@/types";
 import { correspondingModeNums, notesJoined } from "@/constants";
 import { filterByAccidental, rotateArray } from "@/util/helper-methods";
 
-export default function Ball({
+export default function IntervalStepIcon({
   active,
   typeFragmentNum,
   ballIdx,
   rootNoteIdx,
   accidental,
   modalDisplay,
-}: Ball) {
+}: IntervalStep) {
   const typeIdx = (typeFragmentNum - 1) as Range_3 | number;
   const modeIdx = correspondingModeNums[typeIdx][modalDisplay] as Range_7;
   const noteIdx = ((ballIdx + typeIdx + modeIdx) % 12) as Range_12; // idx from selected root note, chromatic; i.e. root === 'B' ∴ 'D#' will give 4

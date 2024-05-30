@@ -5,14 +5,14 @@ import { useEffect, useState } from "react";
 // Component Imports
 import Fretboard from "./components/Fretboard";
 import MajorScaleKeySelector from "./components/MajorScaleKeySelector";
-import { default as _TypeFragment } from "./components/TypeFragment";
+import { default as _IntervalPatterns } from "./components/IntervalPatterns";
 
 // Util Imports
 import { modesObj } from "@/constants";
 import type {
   Accidental,
   ModalDisplayList,
-  TypeFragmentDynamicProps,
+  IntervalPatternsDynamicProps,
 } from "@/types";
 
 // Redux Imports
@@ -35,10 +35,10 @@ export default function Home() {
 
   const dispatch = useAppDispatch();
 
-  const TypeFragment = ({ type, activeList }: TypeFragmentDynamicProps) => (
+  const IntervalPatterns = ({ type, activeList }: IntervalPatternsDynamicProps) => (
     <>
       <hr />
-      <_TypeFragment
+      <_IntervalPatterns
         {...{ type, activeList, setModalDisplayList }}
         modalDisplay={modalDisplayList[type - 1]}
         rootNoteIdx={noteNum}
@@ -67,11 +67,11 @@ export default function Home() {
         setAccidental={setDisplayAccidental}
       />
       <>
-        <TypeFragment type={1} activeList={[0, 2, 4]} />
-        <TypeFragment type={2} activeList={[0, 2, 3]} />
-        <TypeFragment type={3} activeList={[0, 1, 3]} />
+        <IntervalPatterns type={1} activeList={[0, 2, 4]} />
+        <IntervalPatterns type={2} activeList={[0, 2, 3]} />
+        <IntervalPatterns type={3} activeList={[0, 1, 3]} />
       </>
-      <Fretboard rootNoteIdx={noteNum} />
+      <Fretboard rootNoteIdx={noteNum} displayAccidental={displayAccidental} />
       {/* </Provider> */}
     </main>
   );

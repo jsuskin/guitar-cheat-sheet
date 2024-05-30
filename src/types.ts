@@ -5,12 +5,12 @@ export interface MajorScaleKeySelector {
   setAccidental: (accidental: Accidental) => void;
 }
 
-export interface TypeFragmentDynamicProps {
+export interface IntervalPatternsDynamicProps {
   type: 1 | 2 | 3;
   activeList: number[];
 }
 
-export interface TypeFragment extends TypeFragmentDynamicProps {
+export interface IntervalPatterns extends IntervalPatternsDynamicProps {
   rootNoteIdx: number;
   accidental: Accidental;
   modalDisplay: any;
@@ -25,7 +25,7 @@ export type ModalDisplayList = [
   Range_2 | "all"
 ];
 
-export interface Ball {
+export interface IntervalStep {
   active: boolean;
   typeFragmentNum: number;
   ballIdx: Range_5;

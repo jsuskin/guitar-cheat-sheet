@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "@/app/styles/typeFragment.module.css";
+import styles from "@/app/styles/intervalPatterns.module.css";
 import { typeIntervals } from "@/constants";
 
-export default function TypeFragmentHeader({ type }: { type: 1 | 2 | 3 }) {
+export default function IntervalPatternsHeader({ type }: { type: 1 | 2 | 3 }) {
   return (
     <h1>
       Type {type}&nbsp;&nbsp;&nbsp;
