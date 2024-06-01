@@ -8,7 +8,7 @@ import MajorScaleKeySelector from "./components/MajorScaleKeySelector";
 import { default as _IntervalPatterns } from "./components/IntervalPatterns";
 
 // Util Imports
-import { modesObj } from "@/constants";
+import { getPatternsArray, zeroBase } from "@/util/helper-methods";
 import type {
   Accidental,
   ModalDisplayList,
@@ -17,7 +17,7 @@ import type {
 
 // Redux Imports
 import { setPatternsArray } from "./redux/features/fretboard/fretboardSlice";
-import { useAppDispatch } from "./redux/hooks";
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
 
 // Style Imports
 import styles from "./page.module.css";
@@ -32,14 +32,21 @@ export default function Home() {
   const [modalDisplayList, setModalDisplayList] = useState<ModalDisplayList>([
     0, 0, 0,
   ]);
+  const fretboardPatternsArray = useAppSelector(
+    (state: any) => state.fretboard.patternsArray
+  );
 
   const dispatch = useAppDispatch();
 
-  const IntervalPatterns = ({ type, activeList }: IntervalPatternsDynamicProps) => (
+  const IntervalPatterns = ({
+    type,
+    activeList,
+    modeName,
+  }: IntervalPatternsDynamicProps) => (
     <>
       <hr />
       <_IntervalPatterns
-        {...{ type, activeList, setModalDisplayList }}
+        {...{ type, activeList, setModalDisplayList, modeName }}
         modalDisplay={modalDisplayList[type - 1]}
         rootNoteIdx={noteNum}
         accidental={displayAccidental}
@@ -48,16 +55,10 @@ export default function Home() {
   );
 
   useEffect(() => {
-    const modeNames = ['Ionian', 'Dorian', 'Phrygian'];
-    const patterns = modeNames.map(mName => modesObj[mName]);
-
-    // dispatch(setPatternsArray(patterns));
-    dispatch(setPatternsArray(modeNames.reduce((acc, cur, idx) => {
-      return { ...acc, [cur]: modesObj[cur]};
-    }, {})))
+    const initPatterns = ["Ionian", "Dorian", "Phrygian"];
+    dispatch(setPatternsArray(getPatternsArray(...initPatterns)));
   }, []);
 
-  // <Provider store={store}>
   return (
     <main className={styles.main}>
       <MajorScaleKeySelector
@@ -66,13 +67,19 @@ export default function Home() {
         accidental={displayAccidental}
         setAccidental={setDisplayAccidental}
       />
-      <>
-        <IntervalPatterns type={1} activeList={[0, 2, 4]} />
-        <IntervalPatterns type={2} activeList={[0, 2, 3]} />
-        <IntervalPatterns type={3} activeList={[0, 1, 3]} />
-      </>
+      <ul>
+        {Object.entries(fretboardPatternsArray).map(
+          ([modeName, activeList]: any, idx: any) => (
+            <IntervalPatterns
+              key={idx}
+              type={idx + 1}
+              activeList={activeList.map(zeroBase)}
+              {...{ modeName }}
+            />
+          )
+        )}
+      </ul>
       <Fretboard rootNoteIdx={noteNum} displayAccidental={displayAccidental} />
-      {/* </Provider> */}
     </main>
   );
 }

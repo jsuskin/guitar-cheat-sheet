@@ -13,6 +13,12 @@ export default function IntervalSteps({
   const d = Array.from({ length: 5 }, (_, idx) => activeList.includes(idx));
   const [hover, setHover] = useState(false);
 
+  useEffect(() => {
+    if (hover) {
+    } else {
+    }
+  }, [hover]);
+
   return (
     <ul
       className={styles["type-fragment"]}

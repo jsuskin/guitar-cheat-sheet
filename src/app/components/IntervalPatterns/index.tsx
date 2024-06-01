@@ -11,9 +11,13 @@ export default function IntervalPatterns({
   rootNoteIdx,
   accidental,
   modalDisplay,
+  modeName,
   setModalDisplayList,
 }: IntervalPatterns) {
-  const IntervalSteps = ({ _modalDisplay = modalDisplay }: any) => (
+  console.log("in IntervalPatterns", {modeName, activeList, type})
+  const IntervalSteps = ({ _modalDisplay = modalDisplay }: any) => {
+    console.log("In IntervalPatterns>_IntervalSteps: ",{_modalDisplay,activeList})
+    return (
     <_IntervalSteps
       {...{
         rootNoteIdx,
@@ -23,7 +27,7 @@ export default function IntervalPatterns({
         modalDisplay: _modalDisplay,
       }}
     />
-  );
+  )};
 
   return (
     <section className={styles["type-fragment-container"]}>

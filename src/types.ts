@@ -6,8 +6,9 @@ export interface MajorScaleKeySelector {
 }
 
 export interface IntervalPatternsDynamicProps {
-  type: 1 | 2 | 3;
+  type: number;
   activeList: number[];
+  modeName: string;
 }
 
 export interface IntervalPatterns extends IntervalPatternsDynamicProps {
@@ -17,6 +18,11 @@ export interface IntervalPatterns extends IntervalPatternsDynamicProps {
   setModalDisplayList: (
     prev: ModalDisplayList | ((prev: ModalDisplayList) => ModalDisplayList)
   ) => void;
+}
+
+export interface Fretboard {
+  rootNoteIdx: number;
+  displayAccidental: "sharp" | "flat";
 }
 
 export type ModalDisplayList = [
