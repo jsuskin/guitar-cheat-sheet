@@ -16,7 +16,10 @@ import type {
 } from "@/types";
 
 // Redux Imports
-import { setPatternsArray } from "./redux/features/fretboard/fretboardSlice";
+import {
+  setPatternsArray,
+  setModalDisplayList as _setModalDisplayList,
+} from "./redux/features/fretboard/fretboardSlice";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
 
 // Style Imports
@@ -29,14 +32,27 @@ export default function Home() {
   // Whether to display A# or Bb in the interface
   const [displayAccidental, setDisplayAccidental] =
     useState<Accidental>("sharp");
-  const [modalDisplayList, setModalDisplayList] = useState<ModalDisplayList>([
-    0, 0, 0,
-  ]);
+  // const [modalDisplayList, setModalDisplayList] = useState<ModalDisplayList>([
+  //   0, 0, 0,
+  // ]);
   const fretboardPatternsArray = useAppSelector(
     (state: any) => state.fretboard.patternsArray
   );
+  const modalDisplayList = useAppSelector(
+    (state: any) => state.fretboard.modalDisplayList
+  );
 
   const dispatch = useAppDispatch();
+
+  /**
+   * @function setModalDisplayList
+   * 
+   * @param {Array} arr - The input array
+   * @param {number} arr[0] - The index in modalDisplayList we want to mutate
+   * @param {number} arr[1] - The mode index we want to insert into modalDisplayList[arr[0]]
+   */
+  const setModalDisplayList = (arr: any) =>
+    dispatch(_setModalDisplayList(arr));
 
   const IntervalPatterns = ({
     type,
@@ -56,7 +72,7 @@ export default function Home() {
 
   useEffect(() => {
     const initPatterns = ["Ionian", "Dorian", "Phrygian"];
-    dispatch(setPatternsArray(getPatternsArray(...initPatterns)));
+    dispatch(setPatternsArray(getPatternsArray(...initPatterns) as any));
   }, []);
 
   return (

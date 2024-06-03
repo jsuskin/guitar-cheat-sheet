@@ -15,9 +15,7 @@ export interface IntervalPatterns extends IntervalPatternsDynamicProps {
   rootNoteIdx: number;
   accidental: Accidental;
   modalDisplay: any;
-  setModalDisplayList: (
-    prev: ModalDisplayList | ((prev: ModalDisplayList) => ModalDisplayList)
-  ) => void;
+  setModalDisplayList: any;
 }
 
 export interface Fretboard {

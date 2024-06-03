@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "@/app/styles/intervalPatterns.module.css";
 import type { Range_2, Range_3, Range_5, IntervalPatterns } from "@/types";
 import IntervalPatternsHeader from "./IntervalPatternsHeader";
 import ModesList from "./ModesList";
 import { default as _IntervalSteps } from "./IntervalSteps";
+import { modes } from "@/constants";
 
 export default function IntervalPatterns({
   type,
@@ -14,10 +15,7 @@ export default function IntervalPatterns({
   modeName,
   setModalDisplayList,
 }: IntervalPatterns) {
-  console.log("in IntervalPatterns", {modeName, activeList, type})
-  const IntervalSteps = ({ _modalDisplay = modalDisplay }: any) => {
-    console.log("In IntervalPatterns>_IntervalSteps: ",{_modalDisplay,activeList})
-    return (
+  const IntervalSteps = ({ _modalDisplay = modalDisplay, modeName }: any) => (
     <_IntervalSteps
       {...{
         rootNoteIdx,
@@ -25,9 +23,21 @@ export default function IntervalPatterns({
         type,
         activeList,
         modalDisplay: _modalDisplay,
+        modeName
       }}
     />
-  )};
+  );
+
+  const getModeNameFromPatternIndex = (patternIndex: number) =>
+    modes[
+      [
+        [0, 3, 4],
+        [1, 5],
+        [2, 6],
+      ][type - 1][patternIndex]
+    ];
+
+  const getCurModeIdx = () => typeof modalDisplay === "number" ? modalDisplay : 0
 
   return (
     <section className={styles["type-fragment-container"]}>
@@ -50,15 +60,26 @@ export default function IntervalPatterns({
         </div>
       </div>
       <div>
-        {modalDisplay === "all" ? (
-          <>
-            <IntervalSteps _modalDisplay={0} />
-            <IntervalSteps _modalDisplay={1} />
-            {type === 1 && <IntervalSteps _modalDisplay={2} />}
-          </>
-        ) : (
-          <IntervalSteps />
-        )}
+        <>
+          <IntervalSteps
+            _modalDisplay={getCurModeIdx()}
+            modeName={getModeNameFromPatternIndex(getCurModeIdx())}
+          />
+          {modalDisplay === "all" && (
+            <>
+              <IntervalSteps
+                _modalDisplay={1}
+                modeName={getModeNameFromPatternIndex(1)}
+              />
+              {type === 1 && (
+                <IntervalSteps
+                  _modalDisplay={2}
+                  modeName={getModeNameFromPatternIndex(2)}
+                />
+              )}
+            </>
+          )}
+        </>
       </div>
     </section>
   );

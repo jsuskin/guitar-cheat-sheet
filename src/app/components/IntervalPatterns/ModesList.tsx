@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "@/app/styles/intervalPatterns.module.css";
 import {
   correspondingModeNames,
@@ -8,6 +8,7 @@ import {
 } from "@/constants";
 import type { Note, Range_3 } from "@/types";
 import { getNotesFromRoot, getActiveNotes } from "@/util/helper-methods";
+import { useAppSelector } from "@/app/redux/hooks";
 
 export default function ModesList({
   setModalDisplayList,
@@ -17,14 +18,16 @@ export default function ModesList({
   activeList,
   accidental,
 }: any) {
-  const handleShowAll = (e: any) => {
+  const modalDisplayList = useAppSelector((state:any) => state.fretboard.modalDisplayList);
+
+  const handleSetDisplayTypePattern = (pIdx: number | "all") => (e: any) => {
     e.preventDefault();
-    setModalDisplayList((prev: any) => {
-      const newArr = [...prev];
-      newArr[typeIdx] = "all";
-      return newArr;
-    });
+    setModalDisplayList([typeIdx, pIdx]);
   };
+
+  // useEffect(() => {
+
+  // }, [])
 
   return (
     <ul className={styles["corresponding-modes-list"]}>
@@ -50,20 +53,15 @@ export default function ModesList({
           modeNotesText = ` → ${activeNotes.join(", ")}`;
         }
 
+        const selected = modalDisplayList[typeIdx] === idx
+        console.log({ modalDisplayList, modalDisplay, idx, typeIdx, selected });
+
         return (
           <li key={idx}>
             <button
-              onClick={(e) => {
-                e.preventDefault();
-
-                setModalDisplayList((prev: Range_3[] | number[]) => {
-                  const newArr = [...prev];
-                  newArr[typeIdx] = idx as 0 | 1;
-                  return newArr;
-                });
-              }}
+              onClick={handleSetDisplayTypePattern(idx)}
               className={`${styles["mode-button"]} ${
-                styles[idx === modalDisplay ? "active" : "inactive"]
+                styles[selected ? "active" : "inactive"]
               }`}
             >
               {modeName}
@@ -74,7 +72,10 @@ export default function ModesList({
         );
       })}
       <li>
-        <button onClick={handleShowAll} className={styles["mode-button"]}>
+        <button
+          onClick={handleSetDisplayTypePattern("all")}
+          className={styles["mode-button"]}
+        >
           Show All
         </button>
       </li>

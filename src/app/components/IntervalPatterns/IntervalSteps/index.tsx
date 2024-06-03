@@ -9,6 +9,7 @@ export default function IntervalSteps({
   rootNoteIdx,
   accidental,
   modalDisplay,
+  modeName
 }: any) {
   const d = Array.from({ length: 5 }, (_, idx) => activeList.includes(idx));
   const [hover, setHover] = useState(false);
@@ -29,6 +30,7 @@ export default function IntervalSteps({
       onMouseLeave={() => {
         if (hover) setHover(false);
       }}
+      title={modeName}
     >
       {d.map((active, ballIdx) => (
         <IntervalStepIcon
